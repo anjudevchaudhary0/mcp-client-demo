@@ -10,28 +10,28 @@ load_dotenv()
 SERVERS = { 
     "math": {
         "transport": "stdio",
-        "command": "/Library/Frameworks/Python.framework/Versions/3.11/bin/uv",
+        "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/uv",
         "args": [
             "run",
             "fastmcp",
             "run",
-            "/Users/nitish/Desktop/mcp-math-server/main.py"
+            "/Users/devendrakumar/Desktop/MCPs/mcp_client_demo/main.py"
        ]
     },
-    "expense": {
-        "transport": "streamable_http",  # if this fails, try "sse"
-        "url": "https://direct-lime-crayfish.fastmcp.app/mcp"
-    },
-    "manim-server": {
-        "transport": "stdio",
-        "command": "/Library/Frameworks/Python.framework/Versions/3.11/bin/python3",
-        "args": [
-        "/Users/nitish/desktop/manim-mcp-server/src/manim_server.py"
-      ],
-        "env": {
-        "MANIM_EXECUTABLE": "/Library/Frameworks/Python.framework/Versions/3.11/bin/manim"
-      }
-    }
+    # "expense": {
+    #     "transport": "streamable_http",  # if this fails, try "sse"
+    #     "url": "https://direct-lime-crayfish.fastmcp.app/mcp"
+    # },
+    # "manim-server": {
+    #     "transport": "stdio",
+    #     "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
+    #     "args": [
+    #     "/Users/devendrakumar/Desktop/MCPs/manim-mcp-server/src/manim_server.py"
+    #   ],
+    #     "env": {
+    #     "MANIM_EXECUTABLE": "/Library/Frameworks/Python.framework/Versions/3.13/bin/manim"
+    #   }
+    # }
 }
 
 async def main():
@@ -49,7 +49,7 @@ async def main():
     llm = ChatOpenAI(model="gpt-5")
     llm_with_tools = llm.bind_tools(tools)
 
-    prompt = "Draw a triangle rotating in place using the manim tool."
+    prompt = "What is (12 + 8) to the power of 2, modulo 7?"
     response = await llm_with_tools.ainvoke(prompt)
 
     if not getattr(response, "tool_calls", None):

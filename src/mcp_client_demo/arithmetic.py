@@ -29,5 +29,19 @@ def divide(a: float, b: float) -> float:
     return a / b
 
 
+@mcp.tool
+def power(a: float, b: float) -> float:
+    """Raise a to the power of b."""
+    return a**b
+
+
+@mcp.tool
+def modulus(a: float, b: float) -> float:
+    """Return the remainder of a divided by b."""
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a % b
+
+
 if __name__ == "__main__":
     mcp.run()

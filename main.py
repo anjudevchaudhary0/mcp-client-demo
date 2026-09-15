@@ -1,6 +1,6 @@
 from fastmcp import FastMCP
 
-from mcp_client_demo.math import mcp as math_mcp
+from mcp_client_demo.arithmetic import mcp as math_mcp
 
 mcp = FastMCP("MCP Client Demo")
 
