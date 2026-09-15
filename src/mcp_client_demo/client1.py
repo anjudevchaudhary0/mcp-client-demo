@@ -3,11 +3,14 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 from dotenv import load_dotenv
 from langchain_ollama import ChatOllama
 from langchain_core.messages import ToolMessage
+from fastmcp.client.auth import OAuth
 import json
 
 load_dotenv()
 
-SERVERS = { 
+EXPENSE_URL = "https://direct-lime-crayfish.fastmcp.app/mcp"
+
+SERVERS = {
     "math": {
         "transport": "stdio",
         "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/uv",
@@ -18,10 +21,16 @@ SERVERS = {
             "/Users/devendrakumar/Desktop/MCPs/mcp_client_demo/main.py"
        ]
     },
-    # "expense": {
-    #     "transport": "streamable_http",  # if this fails, try "sse"
-    #     "url": "https://direct-lime-crayfish.fastmcp.app/mcp"
-    # },
+    "expense": {
+        "transport": "streamable_http",
+        "url": EXPENSE_URL,
+        "auth": OAuth(
+            mcp_url=EXPENSE_URL,
+            additional_client_metadata={
+                "token_endpoint_auth_method": "client_secret_post",
+            },
+        ),
+    },
     # "manim-server": {
     #     "transport": "stdio",
     #     "command": "/Library/Frameworks/Python.framework/Versions/3.13/bin/python3",
