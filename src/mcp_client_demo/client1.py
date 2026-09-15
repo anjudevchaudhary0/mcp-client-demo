@@ -1,7 +1,7 @@
 import asyncio
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_core.messages import ToolMessage
 import json
 
@@ -46,7 +46,7 @@ async def main():
 
     print("Available tools:", named_tools.keys())
 
-    llm = ChatOpenAI(model="gpt-5")
+    llm = ChatOllama(model="llama3.2")
     llm_with_tools = llm.bind_tools(tools)
 
     prompt = "What is (12 + 8) to the power of 2, modulo 7?"
